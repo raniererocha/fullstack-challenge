@@ -3,11 +3,11 @@ version: '3.1'
 services:
   db: 
     image: postgres
-    container_name: todo_db
+    container_name: ${DB_NAME}
     restart: always
     environment:
-      POSTGRES_PASSWORD: admin
-      POSTGRES_USER: admin
-      POSTGRES_DB: todo_db
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_NAME}
     ports:
-      - 5432:5432
+      - 5432:${DB_PORT}

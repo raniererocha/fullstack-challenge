@@ -1,23 +1,7 @@
-# estrutura do Banco de dados
-User {
-    id : uuid
-    name: string
-    email: string
-    password: string
-    role: Role.id
-}
-Todo {
-    id: uuid
-    title: string
-    description: string
-    author: User.id
-    created_at: date
-    updated_at?: date
-}
-Role {
-    id: integer,
-    description: string
-}
+# Como rodar o backend
 
-Roles: ["Admin", "User"]
-
+ - 1 - renomei o arquivo .env.example removendo o .example do final e preencha as informações
+ - 2 - Suba o container do banco de dados com o comando `docker-compose up -d` (É necessário ter o docker e o docker-compose instalados)
+ - 3 - Instale as dependências do projeto com o comando `npm install` ou `yarn`
+ - 4 - Gere as tabelas com o comando `npm run generate` ou `yarn generate`
+ - 5 - Rode a aplicação com o comando `npm run start` ou `yarn start`
