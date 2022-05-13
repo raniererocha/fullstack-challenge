@@ -1,13 +1,18 @@
 import React from 'react'
 import {Routes, Route, Navigate, Outlet} from 'react-router-dom'
+import Home from '../../pages/Home'
+import Login from '../../pages/Login'
+import SignUp from '../../pages/SignUp'
+
+
 
 export default function PageRouter() {
     return(
         <Routes>
-            <Route path='/signin' element={<h1>Login</h1>} />
-            <Route path='/signup' element={<h1>Cadastro</h1>} />
-            <Route element={<ProtectedRoutes redirectTo='/login' />}>
-                <Route path='/' element={<h1>Home</h1>} />
+            <Route path='/signin' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route element={<ProtectedRoutes redirectTo='/signin' />}>
+                <Route path='/' element={<Home />} />
                 <Route path='/adm' element={<h1>Administrador</h1>} />
             </Route>
         </Routes>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Button, ButtonLink, InputForm} from '../../styles/GlobalStyle'
 
 export const Container = styled.section`
     width: 100vw;   
@@ -24,22 +25,11 @@ export const Form = styled.form`
         font-size: 2.2rem;
     }
 `
-export const InputForm = styled.input`
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
+export const BtnLogin = styled(Button)`
+    
 `
-export const Button = styled.button`
-    padding: 8px 20px;
-    border: 1px solid #ccc;
-    font-weight: bold;
-    color: #333;
-    border-radius: 2px;
-    cursor: pointer;
+export const BtnLink = styled(ButtonLink) `
+
 `
-export const ButtonLink = styled(Button)`
-    background-color: transparent;
-    border: none;
-    color: white;
+export const LoginInputForm = styled(InputForm) `
 `

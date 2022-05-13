@@ -1,5 +1,12 @@
+
+import Menu from '../../components/Menu'
+import * as C from './style'
+
 export default function Home() {
     return(
-        <div></div>
+        <C.HomeContainer>
+            <Menu />
+            
+        </C.HomeContainer>
     )
 }

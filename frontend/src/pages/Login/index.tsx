@@ -1,5 +1,7 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import {useNavigate} from 'react-router-dom'
+import { api } from "../../assets/api"
+import { getItem } from "../../assets/localStorage"
 
 import * as C from './style'
 
@@ -13,24 +15,24 @@ export default function Login() {
     return(
         <C.Container>
             <C.Form onSubmit={
-                (evt) => {
+                async (evt) => {
                     evt.preventDefault()
-                    console.log({
-                        email: emailInput,
-                        password: passwordInput
-                    })
+                    try {
+                       await api.post('/signin', {email: emailInput, password: passwordInput})
+                    } catch ({message}) {
+                        alert(message)
+                    }
                 }
             }>
                 <h1>Login</h1>
-                <C.InputForm type="email" onChange={evt => setEmailInput(evt.target.value)} placeholder="Email"/>
-                
-                <C.InputForm type="password" value={passwordInput} onChange={evt => setPasswordInput(evt.target.value)}  placeholder="Senha" />
+                <C.LoginInputForm type="email" onChange={evt => setEmailInput(evt.target.value)} placeholder="Email"/>
+                <C.LoginInputForm type="password" value={passwordInput} onChange={evt => setPasswordInput(evt.target.value)}  placeholder="Senha" />
                 <div>
-                    <C.Button>Login</C.Button>
-                    <C.ButtonLink onClick={ evt => {
+                    <C.BtnLogin>Login</C.BtnLogin>
+                    <C.BtnLink onClick={ evt => {
                         evt.preventDefault()
                         navigate('/signup')
-                    } }>Cadastre-se</C.ButtonLink>
+                    } }>Cadastre-se</C.BtnLink>
                 </div>
             </C.Form>
         </C.Container>
