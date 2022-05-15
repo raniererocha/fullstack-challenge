@@ -58,13 +58,13 @@ export const login = async (req: express.Request, res: express.Response) => {
                 token
             })
         } else {
-            res.status(401).json({
+            return res.status(401).json({
                 message: "invalid email or password"
             })
         }
-        res.send(user)
+        return res.send(user)
     } catch ({ message }) {
-        res.status(401).json({
+        return res.status(401).json({
             message: message
         })
     }

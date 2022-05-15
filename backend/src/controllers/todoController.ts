@@ -43,7 +43,7 @@ export const getAllTodo = async (req: express.Request, res: express.Response) =>
             const adminTodos = await db.todo.findMany({include: {user: {select: {email: true, name: true}}}})
             res.send(adminTodos)
         } else {
-            const userTodos = await db.todo.findMany({where: { author_id: userId}})
+            const userTodos = await db.todo.findMany({where: { author_id: userId}, include: { user: { select: { name: true} } } })
             res.send(userTodos) 
         }
 
