@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import { api } from '../../assets/api'
 import * as C from './style'
 
 export default function SignUp() {
@@ -11,8 +12,31 @@ export default function SignUp() {
 
     const navigate = useNavigate()
 
-    const handleSingUp = async (evt) => {
+    useEffect( () => {
+        window.localStorage.getItem('token') ? navigate('/') : ''
+    }, [])
+
+    const handleSingUp = async (evt: any) => {
         evt.preventDefault()
+        const isSamePassword = inputPassword === inputCoPassword
+        if (isSamePassword) {
+            const userData = {
+                name: inputName,
+                email: inputEmail,
+                password: inputPassword
+            }
+            try {
+                const { data } = await api.post('/signup', userData) 
+                const {name, token} = data
+                window.localStorage.setItem('token', token)
+                window.localStorage.setItem('userInfo', name)
+                navigate('/')
+            } catch (error: any) {
+                alert(error.response.data.message)
+            }
+        } else {
+            alert('Senha e Confirmação diferentes')
+        }
     }
 
     return(
@@ -43,7 +67,7 @@ export default function SignUp() {
                     value={inputCoPassword}
                     onChange={ evt => setInputCoPassword(evt.target.value) }
                 />
-                <C.SignUpBtn onClick={ handleSignUp} >Cadastrar</C.SignUpBtn>
+                <C.SignUpBtn onClick={handleSingUp} >Cadastrar</C.SignUpBtn>
                 <C.SignUpBtnLink onClick={ evt => {
                     evt.preventDefault()
                     navigate('/signin')

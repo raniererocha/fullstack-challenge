@@ -8,6 +8,7 @@ export const HeaderContainer = styled.header`
 
     display: flex;
     justify-content: space-between;
+    width: 100vw;
 `
 export const HeaderBtnLink = styled(ButtonLink)`
     color: #ccc;

@@ -24,6 +24,6 @@ interface ProtectedRoutesProps {
 }
 
 function ProtectedRoutes({redirectTo}: ProtectedRoutesProps) {
-    const isAuthenticated = true
+    const isAuthenticated = window.localStorage.getItem('token')
     return isAuthenticated ? <Outlet/> : <Navigate to={redirectTo} />
 }
