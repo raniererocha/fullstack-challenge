@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import { api } from '../../assets/api'
+import Modal from '../../components/Modal'
 import * as C from './style'
 
 export default function SignUp() {
+
+    const [errorModalIsOpen, setErrorModalIsOpen] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
 
     const [inputName, setInputName] = useState<string>('')
     const [inputEmail, setInputEmail] = useState<string>('')
@@ -32,10 +36,12 @@ export default function SignUp() {
                 window.localStorage.setItem('userInfo', name)
                 navigate('/')
             } catch (error: any) {
-                alert(error.response.data.message)
+                setErrorMessage(error.response.data.message)
+                setErrorModalIsOpen(true)
             }
         } else {
-            alert('Senha e Confirmação diferentes')
+            setErrorMessage('Senha e Confirmação diferentes')
+            setErrorModalIsOpen(true)
         }
     }
 
@@ -73,6 +79,14 @@ export default function SignUp() {
                     navigate('/signin')
                 } } >Já é cadastrado? Faça login!</C.SignUpBtnLink>
             </C.SignUpForm>
+            {
+                errorModalIsOpen && <Modal modalController={() => setErrorModalIsOpen(false)}>
+                    <div style={{backgroundColor: '#ccc', padding: '2rem'}}>
+                        <h1>Ops aconteceu um probleminha...</h1>
+                        <p style={{marginTop: '1.5rem'}}>{errorMessage}</p>
+                    </div>
+                </Modal>
+            }
         </C.SignUpContainer>
     )
 }

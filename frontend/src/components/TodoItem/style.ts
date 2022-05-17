@@ -1,6 +1,14 @@
 import styled from "styled-components";
+import {Form, LoginInputForm, BtnLogin} from '../../pages/Login/style'
 
-export const TodoItemContainer = styled.section`
+
+interface ContainerProps {
+    isAfter: boolean
+    isComplete: boolean
+}
+export const TodoItemContainer = styled.section<ContainerProps>`
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,7 +23,7 @@ export const TodoItemContainer = styled.section`
     border-radius: 4px;
 
     color: #ccc;
-
+    
     position: relative;
     div {
         display: flex;
@@ -23,8 +31,14 @@ export const TodoItemContainer = styled.section`
         align-items: center;
         justify-content: space-between;
     }
+    h1 {
+        width: 40%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 
-    background-color: #333;
+    background-color: ${props => props.isAfter ? "#fa3939" : props.isComplete ? "#3f9e5a" : '#333'};
     box-shadow: 0 0 2px rgba(0,0,0,.5);
 `
 export const ButtonInfo = styled.button`
@@ -60,6 +74,7 @@ export const Popover = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 150;
 
     ::before {
         content: "";
@@ -71,4 +86,24 @@ export const Popover = styled.section`
         top: -5px;
         right: 3.35px;
     }
+`
+export const EditeItemForm = styled(Form)`
+background-color: #3d3d3d;
+    width: 500px;
+    max-width: 80%;
+    padding: .5rem;
+    p {
+        color: #ccc;
+        width: 80%;
+        font-style: italic;
+    }
+`
+export const EditeItemInput = styled(LoginInputForm)`
+    
+`
+interface BtnEditeProps {
+    isNegative?: boolean
+}
+export const BtnEditeItem = styled(BtnLogin)<BtnEditeProps>`
+    ${props => props.isNegative ? "background-color: #fa3939; color: #ccc" : ""}
 `

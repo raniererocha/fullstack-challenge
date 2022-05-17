@@ -6,6 +6,7 @@ export const ModalContainer = styled.section`
     align-items: center;
     justify-content: center;
     position: absolute;
+    z-index: 999;
     top: 0;
     bottom: 0;
     left: 0;

@@ -16,7 +16,7 @@ export default function TodoList() {
         const response = await api.get('/todo', {headers: {authorization: `bearer ${window.localStorage.getItem('token')}`}})
         return response.data
     })
-
+    
     if (data) {
         
         return(
